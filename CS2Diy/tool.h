@@ -4,7 +4,7 @@
 #include"output/offsets.hpp"
 #include"output/client_dll.hpp"
 #include"tools/XorStr.h"
-#include"address/游戏进程.h"
+#include"address/gameAddress.h"
 #include"output/buttons.hpp"
 #include <Windows.h>
 #include <stdexcept>

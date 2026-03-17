@@ -26,13 +26,13 @@ void 改fov角度() {
 }
 
 void 改fov角度2() {
-    游戏进程::clientAddress + cs2_dumper::offsets::client_dll::dwLocalPlayerPawn;
+    gameAddress::clientAddress + cs2_dumper::offsets::client_dll::dwLocalPlayerPawn;
 }
 
 void 旋转大陀螺() {
     
             float 转速 = 1.f;
-            mem::Write(游戏进程::clientAddress + 视角::yam, &工具::初始值, sizeof(工具::初始值));
+            mem::Write(gameAddress::clientAddress + 视角::yam, &工具::初始值, sizeof(工具::初始值));
             工具::初始值 = 工具::初始值 + 转速;
             if (工具::初始值 == 180)
             {
@@ -43,13 +43,13 @@ void 旋转大陀螺() {
 
 void 一直跳() {
     Sleep(10);
-	if (游戏进程::flag == 65665)
+	if (gameAddress::flag == 65665)
 	{
-		mem::Write(游戏进程::clientAddress + buttons::jump, &游戏进程::jumpOn, sizeof(游戏进程::jumpOn));
+		mem::Write(gameAddress::clientAddress + buttons::jump, &gameAddress::jumpOn, sizeof(gameAddress::jumpOn));
 	}
-    if (游戏进程::flag==65664)
+    if (gameAddress::flag==65664)
     {
-        mem::Write(游戏进程::clientAddress + buttons::jump, &游戏进程::jumpOff, sizeof(游戏进程::jumpOff));
+        mem::Write(gameAddress::clientAddress + buttons::jump, &gameAddress::jumpOff, sizeof(gameAddress::jumpOff));
     }
 
 	
@@ -65,13 +65,13 @@ void 作弊线程1() {
         {
             旋转大陀螺();
         }
-		mem::Read(游戏进程::g_handle, 游戏进程::clientAddress + offsets::client_dll::dwLocalPlayerPawn, &游戏进程::localAddress, sizeof(游戏进程::localAddress));
-        mem::Read(游戏进程::g_handle, 游戏进程::localAddress + schemas::client_dll::C_BaseEntity::m_fFlags, &游戏进程::flag, sizeof(游戏进程::flag));
+		mem::Read(gameAddress::g_handle, gameAddress::clientAddress + offsets::client_dll::dwLocalPlayerPawn, &gameAddress::localAddress, sizeof(gameAddress::localAddress));
+        mem::Read(gameAddress::g_handle, gameAddress::localAddress + schemas::client_dll::C_BaseEntity::m_fFlags, &gameAddress::flag, sizeof(gameAddress::flag));
         if (GetAsyncKeyState(VK_SPACE)) {
             一直跳();
 		}
 		else {
-			mem::Write(游戏进程::clientAddress + buttons::jump, &游戏进程::jumpOff, sizeof(游戏进程::jumpOff));
+			mem::Write(gameAddress::clientAddress + buttons::jump, &gameAddress::jumpOff, sizeof(gameAddress::jumpOff));
 		}
         
     }

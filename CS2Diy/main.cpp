@@ -3,7 +3,9 @@
 #include "myimgui.h"
 #include "cheat.h"
 #include"tools/XorStr.h"
-#include"main.h"
+
+#include"address/gameAddress.h"
+#include <ShlObj.h>
 //#pragma comment( linker, "/subsystem:\"windows\" /entry:\"mainCRTStartup\"" )
 
 using namespace std;
@@ -26,24 +28,24 @@ void initGame() {
 	srand((unsigned)time(NULL));
 	RandomTitle();
 	//获取窗口句柄
-	游戏进程::g_hwnd=FindWindowA(XorStr("SDL_app"), XorStr("Counter-Strike 2"));
-	if (游戏进程::g_hwnd == NULL) {
-		游戏进程::g_hwnd = FindWindowA(XorStr("SDL_app"), XorStr("反恐精英：全球攻势"));
+	gameAddress::g_hwnd=FindWindowA(XorStr("SDL_app"), XorStr("Counter-Strike 2"));
+	if (gameAddress::g_hwnd == NULL) {
+		gameAddress::g_hwnd = FindWindowA(XorStr("SDL_app"), XorStr("反恐精英：全球攻势"));
 		国服 = 1;
 	}
 	SetConsoleTextAttribute(hConsole, FOREGROUND_BLUE | FOREGROUND_GREEN);
-	std::cout << "HWND：" << 游戏进程::g_hwnd << std::endl;
+	std::cout << "HWND：" << gameAddress::g_hwnd << std::endl;
 	//获取窗口对应的进程ID
-	GetWindowThreadProcessId(游戏进程::g_hwnd, &游戏进程::g_pid);
+	GetWindowThreadProcessId(gameAddress::g_hwnd, &gameAddress::g_pid);
 	//获取进程ID对应的进程句柄
-	游戏进程::g_handle = OpenProcess(PROCESS_ALL_ACCESS,true, 游戏进程::g_pid);
+	gameAddress::g_handle = OpenProcess(PROCESS_ALL_ACCESS,true, gameAddress::g_pid);
 	//获取client.dll模块的地址
-	if (游戏进程::clientAddress = mem::GetModule(游戏进程::g_pid, L"client.dll")) {
+	if (gameAddress::clientAddress = mem::GetModule(gameAddress::g_pid, L"client.dll")) {
 		std::cout << XorStr("获取clientAddress成功")<<std::endl;
 	}
 	SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);
-	printf("pid地址：%d\n", 游戏进程::g_pid);
-	printf("clientAddress地址：%p\n", 游戏进程::clientAddress);
+	printf("pid地址：%d\n", gameAddress::g_pid);
+	printf("clientAddress地址：%p\n", gameAddress::clientAddress);
 	SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_RED);
 }
 
@@ -75,3 +77,4 @@ int main()
 	
 	
 }
+

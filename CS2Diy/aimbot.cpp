@@ -31,7 +31,7 @@ void aimbot()
 	cheat::AimAddress[0] = cheat::EnterAimAddress[0];
 	cheat::AimAddress[1] = cheat::EnterAimAddress[1];
 	int lin_hp;
-	mem::Read(游戏进程::g_handle, cheat::AimAddress[0] + 0xB5C, &lin_hp, 4);
+	mem::Read(gameAddress::g_handle, cheat::AimAddress[0] + 0xB5C, &lin_hp, 4);
 	// 判断对方血量是否 > 0
 	if (lin_hp > 0)
 	{
@@ -43,8 +43,8 @@ void aimbot()
 
 			if (GetAsyncKeyState(Menu::Aimkey))
 			{
-				mem::Write(游戏进程::clientAddress + 视角::yam, &cheat::Aimmouse.x, sizeof(cheat::Aimmouse.x));
-				mem::Write(游戏进程::clientAddress + 视角::pitch, &cheat::Aimmouse.y, sizeof(cheat::Aimmouse.y));
+				mem::Write(gameAddress::clientAddress + 视角::yam, &cheat::Aimmouse.x, sizeof(cheat::Aimmouse.x));
+				mem::Write(gameAddress::clientAddress + 视角::pitch, &cheat::Aimmouse.y, sizeof(cheat::Aimmouse.y));
 			}
 		}
 	}
@@ -61,9 +61,9 @@ D2D Aiming(D3D LocalAxis, char* AimAddress)
 	float P_I = 3.1415926535f;
 	//6为目标头部
 	Aimindex = AimAddress + Menu::Aimplace * 32;
-	mem::Read(游戏进程::g_handle, Aimindex, &ActorAxis.x, sizeof(ActorAxis.x));
-	mem::Read(游戏进程::g_handle, Aimindex + 4, &ActorAxis.y, sizeof(ActorAxis.y));
-	mem::Read(游戏进程::g_handle, Aimindex + 8, &ActorAxis.z, sizeof(ActorAxis.z));
+	mem::Read(gameAddress::g_handle, Aimindex, &ActorAxis.x, sizeof(ActorAxis.x));
+	mem::Read(gameAddress::g_handle, Aimindex + 4, &ActorAxis.y, sizeof(ActorAxis.y));
+	mem::Read(gameAddress::g_handle, Aimindex + 8, &ActorAxis.z, sizeof(ActorAxis.z));
 	AimAxis.z = LocalAxis.z - ActorAxis.z;
 	AimAxis.x = ActorAxis.x - LocalAxis.x;
 	AimAxis.y = ActorAxis.y - LocalAxis.y;

@@ -2,7 +2,7 @@
 #include <Windows.h>
 #include <iostream>
 #include <tlhelp32.h>
-#include"../address/游戏进程.h"
+#include"../address/gameAddress.h"
 
 WINUSERAPI SHORT WINAPI GetAsyncKeyState(int vKey);
 
@@ -41,6 +41,13 @@ namespace mem
         CloseHandle(handle);
         return nullptr;
     }
+    inline bool Read(char* 内存地址, void* 存放指针, int 欲读取字节)//无需进程句柄
+    {
+        SIZE_T 缓冲区;
+        if (ReadProcessMemory(gameAddress::g_handle, 内存地址, 存放指针, 欲读取字节, &缓冲区))
+            return true;
+        return false;
+    }
     inline bool Read(HANDLE 进程句柄, char* 内存地址, void* 存放指针, int 欲读取字节)
     {
         SIZE_T 缓冲区;
@@ -48,10 +55,11 @@ namespace mem
             return true;
         return false;
     }
+   
     inline bool Write( char* 内存地址, void* 写入数据, int 欲写入字节)
     {
         SIZE_T 缓冲区;
-        if (WriteProcessMemory(游戏进程::g_handle, 内存地址, 写入数据, 欲写入字节, &缓冲区))
+        if (WriteProcessMemory(gameAddress::g_handle, 内存地址, 写入数据, 欲写入字节, &缓冲区))
             return true;
         return false;
     }

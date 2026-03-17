@@ -122,19 +122,10 @@
     <ClInclude Include="tools\XorStr.h">
       <Filter>工具类</Filter>
     </ClInclude>
-    <ClInclude Include="output\vphysics2_dll.hpp">
-      <Filter>output</Filter>
-    </ClInclude>
-    <ClInclude Include="output\soundsystem_dll.hpp">
-      <Filter>output</Filter>
-    </ClInclude>
     <ClInclude Include="output\server_dll.hpp">
       <Filter>output</Filter>
     </ClInclude>
     <ClInclude Include="output\schemasystem_dll.hpp">
-      <Filter>output</Filter>
-    </ClInclude>
-    <ClInclude Include="output\scenesystem_dll.hpp">
       <Filter>output</Filter>
     </ClInclude>
     <ClInclude Include="output\resourcesystem_dll.hpp">
@@ -144,9 +135,6 @@
       <Filter>output</Filter>
     </ClInclude>
     <ClInclude Include="output\particles_dll.hpp">
-      <Filter>output</Filter>
-    </ClInclude>
-    <ClInclude Include="output\panorama_dll.hpp">
       <Filter>output</Filter>
     </ClInclude>
     <ClInclude Include="output\networksystem_dll.hpp">
@@ -179,10 +167,7 @@
     <ClInclude Include="address\angle.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="address\游戏进程.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="main.h">
+    <ClInclude Include="address\gameAddress.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="tools\Mem.h">

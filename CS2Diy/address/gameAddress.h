@@ -1,7 +1,7 @@
 #pragma once
 #include <Windows.h>
 #include"../myimgui.h"
-namespace 游戏进程 {
+namespace gameAddress {
 	inline HWND g_hwnd;
 	//模块地址
 	inline char* clientAddress;

@@ -167,8 +167,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="aimbot.h" />
-    <ClInclude Include="main.h" />
-    <ClInclude Include="address\游戏进程.h" />
+    <ClInclude Include="address\gameAddress.h" />
     <ClInclude Include="cheat.h" />
     <ClInclude Include="ImGui\imconfig.h" />
     <ClInclude Include="ImGui\imgui.h" />
@@ -189,15 +188,11 @@
     <ClInclude Include="output\materialsystem2_dll.hpp" />
     <ClInclude Include="output\networksystem_dll.hpp" />
     <ClInclude Include="output\offsets.hpp" />
-    <ClInclude Include="output\panorama_dll.hpp" />
     <ClInclude Include="output\particles_dll.hpp" />
     <ClInclude Include="output\pulse_system_dll.hpp" />
     <ClInclude Include="output\resourcesystem_dll.hpp" />
-    <ClInclude Include="output\scenesystem_dll.hpp" />
     <ClInclude Include="output\schemasystem_dll.hpp" />
     <ClInclude Include="output\server_dll.hpp" />
-    <ClInclude Include="output\soundsystem_dll.hpp" />
-    <ClInclude Include="output\vphysics2_dll.hpp" />
     <ClInclude Include="tool.h" />
     <ClInclude Include="tools\Mem.h" />
     <ClInclude Include="tools\XorStr.h" />
