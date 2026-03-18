@@ -39,6 +39,7 @@ void initGame() {
 	GetWindowThreadProcessId(gameAddress::g_hwnd, &gameAddress::g_pid);
 	//获取进程ID对应的进程句柄
 	gameAddress::g_handle = OpenProcess(PROCESS_ALL_ACCESS,true, gameAddress::g_pid);
+	std::cout << "g_handle" << gameAddress::g_handle << std::endl;
 	//获取client.dll模块的地址
 	if (gameAddress::clientAddress = mem::GetModule(gameAddress::g_pid, L"client.dll")) {
 		std::cout << XorStr("获取clientAddress成功")<<std::endl;
