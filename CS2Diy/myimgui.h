@@ -1,4 +1,8 @@
 ﻿#pragma once
+
+#include<iostream>
+#include<Windows.h>
+#include<thread>
 #include "ImGui/imconfig.h"
 #include "ImGui/imgui.h"
 #include "ImGui/imgui_impl_dx11.h"
@@ -10,9 +14,6 @@
 #include"tool.h"
 #include"esp.h"
 
-#include<iostream>
-#include<Windows.h>
-#include<thread>
 
 
 #include <d3d11.h>

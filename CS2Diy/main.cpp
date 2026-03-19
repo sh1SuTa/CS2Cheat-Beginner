@@ -3,7 +3,7 @@
 #include "myimgui.h"
 #include "cheat.h"
 #include"tools/XorStr.h"
-
+#include"kernelMem.h"
 #include"address/gameAddress.h"
 #include <ShlObj.h>
 //#pragma comment( linker, "/subsystem:\"windows\" /entry:\"mainCRTStartup\"" )
@@ -37,11 +37,8 @@ void initGame() {
 	std::cout << "HWND：" << gameAddress::g_hwnd << std::endl;
 	//获取窗口对应的进程ID
 	GetWindowThreadProcessId(gameAddress::g_hwnd, &gameAddress::g_pid);
-	//获取进程ID对应的进程句柄
-	gameAddress::g_handle = OpenProcess(PROCESS_ALL_ACCESS,true, gameAddress::g_pid);
-	std::cout << "g_handle" << gameAddress::g_handle << std::endl;
 	//获取client.dll模块的地址
-	if (gameAddress::clientAddress = mem::GetModule(gameAddress::g_pid, L"client.dll")) {
+	if (gameAddress::clientAddress = mem::get_module_base_address("client.dll",gameAddress::g_pid )) {
 		std::cout << XorStr("获取clientAddress成功")<<std::endl;
 	}
 	SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN);

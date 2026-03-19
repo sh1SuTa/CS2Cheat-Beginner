@@ -42,11 +42,8 @@ int myimgui::CreateWindow_Violet (LPCSTR 类名, LPCSTR title_name, myimgui::myF
 
     ImVec4 clear_color = ImVec4(0.f, 0.f, 0.f, 0.f);
     bool done = false;
-    
-    std::thread  工具线程(作弊线程1);
 
 
-    //std::thread 透视线程(透视绘制);
     while (!done)
     {
         MSG msg;

@@ -1,6 +1,5 @@
 #pragma once
 #include"cheat.h"
-#include"tools/Mem.h"
 
 namespace м╦йс {
 	struct D2D

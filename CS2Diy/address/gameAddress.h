@@ -4,7 +4,7 @@
 namespace gameAddress {
 	inline HWND g_hwnd;
 	//模块地址
-	inline char* clientAddress;
+	inline ULONG64 clientAddress;
 	//pid
 	inline DWORD g_pid;
 	//进程句柄

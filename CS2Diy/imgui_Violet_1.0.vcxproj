@@ -124,7 +124,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
-      <AdditionalIncludeDirectories>address</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>address;output;tools</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -195,7 +195,7 @@
     <ClInclude Include="output\schemasystem_dll.hpp" />
     <ClInclude Include="output\server_dll.hpp" />
     <ClInclude Include="tool.h" />
-    <ClInclude Include="tools\Mem.h" />
+    <ClInclude Include="tools\kernelMem.h" />
     <ClInclude Include="tools\XorStr.h" />
     <ClInclude Include="address\angle.h" />
     <ClInclude Include="esp.h" />
