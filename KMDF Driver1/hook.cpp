@@ -1,12 +1,10 @@
 #include "hook.h"
 #include <wingdi.h>
 GdiSelectBrush_t GdiSelectBrush = NULL;
-
 NtGdiCreateSolidBrush_t NtGdiCreateSolidBrush = NULL;
 PatBlt_t NtGdiPatBlt = NULL;
 NTUserGetDC_t NTUserGetDC = NULL;
 ReleaseDC_t NtUserReleaseDC = NULL;
-
 DeleteObjectApp_t NtGdiDeleteObjectApp = NULL;
 //hook函数
 bool nullhook::call_kernel_function(void* kernel_function_address)
@@ -26,16 +24,18 @@ bool nullhook::call_kernel_function(void* kernel_function_address)
 	BYTE orig[] = { 0x00,0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00 };
 	BYTE shell_code[] = { 0x48,0xb8 };//mov rax,xxx
 	BYTE shell_code_end[] = { 0xff,0xe0 };//jmp rax
-	BYTE shell_code_cmp[] = { 0x3D, 0x3412, 0x0000 };//cmp eax, 0x1234
+	//cmp eax, 0x1234
+	//BYTE shell_code_cmp[] = { 0x3D, 0x3412, 0x0000 };
 
 	//内存区域的内容清零
 	RtlSecureZeroMemory(&orig, sizeof(orig));
 	memcpy((PVOID)(ULONG_PTR)orig, &shell_code, sizeof(shell_code));
+	//memcpy只能把地址里面存的内容复制过去，所以必须要把地址值kernel_function_address包一层整数
 	uintptr_t hook_address = reinterpret_cast<uintptr_t>(kernel_function_address);
 	memcpy((PVOID)((ULONG_PTR)orig + sizeof(shell_code)), &hook_address, sizeof(void*));
 	memcpy((PVOID)((ULONG_PTR)orig + sizeof(shell_code) + sizeof(void*)), &shell_code_end, sizeof(shell_code_end));
 	write_to_read_only_memory(function, &orig, sizeof(orig));
-
+	
 	GdiSelectBrush = (GdiSelectBrush_t)get_system_module_export(L"win32kfull.sys", "NtGdiSelectBrush");
 	NtGdiCreateSolidBrush = (NtGdiCreateSolidBrush_t)get_system_module_export(L"win32kfull.sys", "NtGdiCreateSolidBrush");
 	NtGdiPatBlt = (PatBlt_t)get_system_module_export(L"win32kfull.sys", "NtGdiPatBlt");
@@ -44,7 +44,7 @@ bool nullhook::call_kernel_function(void* kernel_function_address)
 	NtGdiDeleteObjectApp = (DeleteObjectApp_t)get_system_module_export(L"win32kbase.sys", "NtGdiDeleteObjectApp");
 
 	DbgPrint("[+] NTUserGetDC函数的地址:%p\n", NTUserGetDC);
-
+	
 	return true;
 }
 

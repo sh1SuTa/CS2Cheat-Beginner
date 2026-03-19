@@ -81,7 +81,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <TargetName>Photo_v1.0</TargetName>
+    <TargetName>Photoshop</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -166,6 +166,7 @@
     <ClCompile Include="esp.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\..\..\Downloads\output\offsets.hpp" />
     <ClInclude Include="aimbot.h" />
     <ClInclude Include="address\gameAddress.h" />
     <ClInclude Include="cheat.h" />

@@ -1,7 +1,7 @@
 
 #pragma once
 #include"definitions.h"
-
+//通信用的结构体
 typedef struct _NULL_MEMORY {
 	void* buffer_address;
 	UINT_PTR address;

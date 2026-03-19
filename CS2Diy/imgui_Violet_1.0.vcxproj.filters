@@ -155,9 +155,6 @@
     <ClInclude Include="output\animationsystem_dll.hpp">
       <Filter>output</Filter>
     </ClInclude>
-    <ClInclude Include="output\offsets.hpp">
-      <Filter>output</Filter>
-    </ClInclude>
     <ClInclude Include="output\interfaces.hpp">
       <Filter>output</Filter>
     </ClInclude>
@@ -174,6 +171,12 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="aimbot.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Downloads\output\offsets.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="output\offsets.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
