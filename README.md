@@ -1,5 +1,6 @@
 ﻿# CS2Cheat-Trans
-一个简单的外部作弊，适用于初学者学习，并无绕过反作弊功能。
+一个简单的外部作弊，适用于初学者学习，并无绕过反作弊功能。<br>
+KMDF Driver1用于展示如何在驱动中读写内存<br>
 对于俯仰角pitch，范围 89 ~ -89 
 基础地址 cheat::clientAddress + 0x1836BB8
 各偏移量可在out中找到
@@ -20,6 +21,4 @@
 在 高级保存选项中保存为 Unicode代码1200
 ## 游戏控制台指令
 `bot_kick` 踢出机器人
-
-更多带阅读文档 [nfk.putileaf.top](http://nfk.putileaf.top/index.php/2024/11/05/%e8%ae%b0%e4%b8%80%e6%ac%a1%e7%94%a8ce%e5%af%bb%e6%89%becs2%e5%9f%ba%e5%9d%80/)
 
