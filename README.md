@@ -1,4 +1,4 @@
-﻿# CS2Cheat-Trans
+﻿# CS2Cheat-Photoshop.exe
 一个简单的外部作弊，适用于初学者学习，并无绕过反作弊功能。<br>
 KMDF Driver1用于展示如何在驱动中读写内存<br>
 对于俯仰角pitch，范围 89 ~ -89 
