@@ -20,7 +20,7 @@ PVOID get_system_module_base(LPCSTR module_name);
 PVOID get_system_module_export(const char* module_name, LPCSTR routine_name);
 PVOID get_system_module_export(LPCWSTR module_name, LPCSTR routine_name);
 bool write_memory(void* address, void* buffer, size_t size);
-bool write_to_read_only_memory(void* 目标位置, void* 写入的数据, size_t 写入大小);
+bool write_to_read_only_memory(void* 目标位置, void* 写入的数据, ULONG 写入大小);
 
 ULONG64 get_module_base_x64(PEPROCESS proc, UNICODE_STRING module_name);
 

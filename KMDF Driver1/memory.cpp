@@ -11,8 +11,12 @@ PVOID get_system_module_base(LPCSTR module_name)
 	{
 		return NULL;
 	}
+	
+	// 旧的内核内存分配函数 ExAllocatePoolWithTag 已经弃用
+	//PRTL_PROCESS_MODULES modules = (PRTL_PROCESS_MODULES)ExAllocatePoolWithTag(NonPagedPool, bytes, 0x4E554C4C);
 	// 表示分配的内存不会被分页确保内存一直驻留在物理内存中，分配内存所需的字节数为之前获取模块信息的字节大小，分配的内存标签为NULL
-	PRTL_PROCESS_MODULES modules = (PRTL_PROCESS_MODULES)ExAllocatePoolWithTag(NonPagedPool, bytes, 0x4E554C4C);
+	PRTL_PROCESS_MODULES modules =(PRTL_PROCESS_MODULES) ExAllocatePool2(POOL_FLAG_NON_PAGED, 1024, 0x4E554C4C);
+
 	status = ZwQuerySystemInformation(SystemModuleInfomation, modules, bytes, &bytes);
 	if (!NT_SUCCESS(status))
 	{
@@ -81,7 +85,7 @@ PVOID get_system_module_export(LPCWSTR module_name, LPCSTR routine_name) {
 			return (entry->DllBase) ? RtlFindExportedRoutineByName(entry->DllBase, routine_name) : NULL;
 		}
 	}
-
+	return NULL;
 
 }
 bool write_memory(void* address, void* buffer, size_t size)
@@ -96,7 +100,7 @@ bool write_memory(void* address, void* buffer, size_t size)
 	}
 }
 
-bool write_to_read_only_memory(void* 目标位置, void* 写入的数据, size_t 写入大小)
+bool write_to_read_only_memory(void* 目标位置, void* 写入的数据, ULONG 写入大小)
 {
 	//分配内存描述符（MDL）
 	PMDL Mdl = IoAllocateMdl(目标位置, 写入大小, FALSE, FALSE, NULL);

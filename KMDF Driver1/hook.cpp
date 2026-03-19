@@ -52,7 +52,7 @@ NTSTATUS nullhook::hoook_handler(PVOID called_parrm)
 {
 	NULL_MEMORY* instructions = (NULL_MEMORY*)called_parrm;
 	//钩子，请求函数
-	if (instructions->req_base == true)
+	if (instructions->req_base == TRUE)
 	{
 		DbgPrint("[+] 请求模块基地址\n");
 		ANSI_STRING AS;
@@ -78,11 +78,18 @@ NTSTATUS nullhook::hoook_handler(PVOID called_parrm)
 		instructions->base_address = base_address64;
 		RtlFreeUnicodeString(&ModuleName);
 	}
-	else if (instructions->write == true)
+	else if (instructions->write == TRUE)
 	{
 		//检查是否在有效内存，防止蓝屏
 		if (instructions->address < 0x7fffffffffff && instructions->address >0) {
-			PVOID kernelBuff = ExAllocatePool(NonPagedPool, instructions->size);
+			//弃用
+			//PVOID kernelBuff = ExAllocatePool(NonPagedPool, instructions->size);
+			PVOID kernelBuff = ExAllocatePool2(POOL_FLAG_NON_PAGED, 1024, 'tag1');
+
+			if (kernelBuff==0)
+			{
+				return STATUS_INSUFFICIENT_RESOURCES;
+			}
 			if (!memcpy(kernelBuff, instructions->buffer_address, instructions->size))
 			{
 				return STATUS_UNSUCCESSFUL;
@@ -95,7 +102,7 @@ NTSTATUS nullhook::hoook_handler(PVOID called_parrm)
 
 	}
 	//读内存
-	else if (instructions->read == true)
+	else if (instructions->read == TRUE)
 	{
 		if (instructions->address < 0x7fffffffffff && instructions->address >0)
 		{
@@ -109,7 +116,7 @@ NTSTATUS nullhook::hoook_handler(PVOID called_parrm)
 		{
 			return STATUS_UNSUCCESSFUL;
 		}
-		HBRUSH brush = NtGdiCreateSolidBrush(RGB(instructions->r, instructions->g, instructions->b), NULL);
+        HBRUSH brush = NtGdiCreateSolidBrush(RGB(instructions->r, instructions->g, instructions->b), reinterpret_cast<HBRUSH>(1));
 		if (!brush)
 		{
 			return STATUS_UNSUCCESSFUL;
@@ -128,6 +135,7 @@ NTSTATUS nullhook::hoook_handler(PVOID called_parrm)
 
 INT  nullhook::FrameRect(HDC hdc, const RECT* lprc, HBRUSH hbr, int thickness)
 {
+	(void)thickness; 
 	HBRUSH old_brush = NULL;
 	RECT rc = *lprc;
 	if (!(old_brush = GdiSelectBrush(hdc, hbr)))
