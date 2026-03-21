@@ -6,7 +6,7 @@
 #include"kernelMem.h"
 #include"address/gameAddress.h"
 #include <ShlObj.h>
-//#pragma comment( linker, "/subsystem:\"windows\" /entry:\"mainCRTStartup\"" )
+
 
 using namespace std;
 int 国服 = 0;
@@ -45,6 +45,12 @@ void initGame() {
 	printf("pid地址：%d\n", gameAddress::g_pid);
 	printf("clientAddress地址：%p\n", gameAddress::clientAddress);
 	SetConsoleTextAttribute(hConsole, FOREGROUND_GREEN | FOREGROUND_BLUE | FOREGROUND_RED);
+#ifdef Release
+	printf("5秒后自动消失...\n");
+	Sleep(5000);
+	ShowWindow(hWnd, SW_HIDE);
+#endif 
+
 }
 
 
