@@ -84,7 +84,7 @@ NTSTATUS nullhook::hoook_handler(PVOID called_parrm)
 		if (instructions->address < 0x7fffffffffff && instructions->address >0) {
 			//ÆúÓÃ
 			//PVOID kernelBuff = ExAllocatePool(NonPagedPool, instructions->size);
-			PVOID kernelBuff = ExAllocatePool2(POOL_FLAG_NON_PAGED, 1024,NULL);
+			PVOID kernelBuff = ExAllocatePool2(POOL_FLAG_NON_PAGED, instructions->size,NULL);
 
 			if (kernelBuff==0)
 			{

@@ -15,7 +15,7 @@ PVOID get_system_module_base(LPCSTR module_name)
 	// 旧的内核内存分配函数 ExAllocatePoolWithTag 已经弃用
 	//PRTL_PROCESS_MODULES modules = (PRTL_PROCESS_MODULES)ExAllocatePoolWithTag(NonPagedPool, bytes, 0x4E554C4C);
 	// 表示分配的内存不会被分页确保内存一直驻留在物理内存中，分配内存所需的字节数为之前获取模块信息的字节大小，分配的内存标签为NULL
-	PRTL_PROCESS_MODULES modules =(PRTL_PROCESS_MODULES) ExAllocatePool2(POOL_FLAG_NON_PAGED, 1024, 0x4E554C4C);
+	PRTL_PROCESS_MODULES modules =(PRTL_PROCESS_MODULES) ExAllocatePool2(POOL_FLAG_NON_PAGED, bytes, 0x4E554C4C);
 
 	status = ZwQuerySystemInformation(SystemModuleInfomation, modules, bytes, &bytes);
 	if (!NT_SUCCESS(status))
